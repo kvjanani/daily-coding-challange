@@ -1,0 +1,27 @@
+1.Question :268
+  class Solution {
+    public int missingNumber(int[] nums) {
+        int n = nums.length;
+        int sum = n*(n+1)/2;
+        int news= 0;
+        for(int i = 0;i<nums.length;i++){
+            news+=nums[i];
+        }
+    return sum-news;}
+}
+2.Question : 283
+  class Solution {
+    public void moveZeroes(int[] nums) {
+        int i = 0; 
+        for (int num:nums){
+            if(num != 0){
+                nums[i] = num;
+                i++;
+            }
+        }
+        while(i<nums.length){
+            nums[i] = 0;
+            i++;
+        }
+    }
+}
