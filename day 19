@@ -1,0 +1,34 @@
+1.398
+  class Solution {
+    int[] nums;
+
+    public Solution(int[] nums) {
+        this.nums=nums;
+    }
+    
+    public int pick(int target) {
+        List<Integer> l=new ArrayList<>();
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]==target){
+                l.add(i);
+            }
+        }
+        return l.get((int)(Math.random()*(l.size())));
+    }
+}
+
+2. 1323
+  class Solution {
+    public int maximum69Number (int num) {
+        String numb = Integer.toString(num);
+        char[] digits = numb.toCharArray();
+        
+        for (int i = 0; i < digits.length; i++) {
+            if (digits[i] == '6') {
+                digits[i] = '9';
+                break;
+            }
+        }
+        return Integer.parseInt(new String(digits));
+    }
+}
