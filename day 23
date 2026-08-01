@@ -1,0 +1,21 @@
+1.976
+  class Solution {
+    public int largestPerimeter(int[] nums) {
+        Arrays.sort(nums);
+        for (int i = nums.length - 1; i >= 2; i--) {
+            if (nums[i] < nums[i - 1] + nums[i - 2]) {
+                return nums[i] + nums[i - 1] + nums[i - 2];
+            }
+        }
+        return 0;
+    }
+}
+2.219
+  public boolean containsNearbyDuplicate(int[] nums, int k) {
+        Set<Integer> set = new HashSet<Integer>();
+        for(int i = 0; i < nums.length; i++){
+            if(i > k) set.remove(nums[i-k-1]);
+            if(!set.add(nums[i])) return true;
+        }
+        return false;
+ }
