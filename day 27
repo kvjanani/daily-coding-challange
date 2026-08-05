@@ -1,0 +1,44 @@
+1. 680
+  class Solution {
+    public boolean validPalindrome(String s) {
+        int left = 0, right = s.length() - 1;
+        
+        while (left < right) {
+            if (s.charAt(left) != s.charAt(right)) {
+                return isPalindrome(s, left + 1, right) || isPalindrome(s, left, right - 1);
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+    
+    private boolean isPalindrome(String s, int left, int right) {
+        while (left < right) {
+            if (s.charAt(left) != s.charAt(right)) return false;
+            left++;
+            right--;
+        }
+        return true;
+    }
+}
+2.141
+  public class Solution {
+    public boolean hasCycle(ListNode head) {
+
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while (fast != null && fast.next != null) {
+
+            slow = slow.next;
+            fast = fast.next.next;
+
+            if (slow == fast) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
