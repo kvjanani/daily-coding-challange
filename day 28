@@ -1,0 +1,75 @@
+1.971
+  /**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+
+class Solution {
+    List<Integer> result = new ArrayList<>();
+    int index = 0;
+
+    public List<Integer> flipMatchVoyage(TreeNode root, int[] voyage) {
+        dfs(root, voyage);
+
+        if (result.size() > 0 && result.get(0) == -1) {
+            return Arrays.asList(-1);
+        }
+        return result;
+    }
+
+    private void dfs(TreeNode node, int[] voyage) {
+        if (node == null) {
+            return;
+        }
+
+        if (node.val != voyage[index]) {
+            result.clear();
+            result.add(-1);
+            return;
+        }
+
+        index++;
+
+        if (node.left != null &&
+            index < voyage.length &&
+            node.left.val != voyage[index]) {
+
+            result.add(node.val);
+
+            dfs(node.right, voyage);
+            dfs(node.left, voyage);
+        } else {
+            dfs(node.left, voyage);
+            dfs(node.right, voyage);
+        }
+    }
+}
+2.303
+  class NumArray {
+
+    int[] prefix;
+
+    public NumArray(int[] nums) {
+        prefix = new int[nums.length + 1];
+
+        for (int i = 0; i < nums.length; i++) {
+            prefix[i + 1] = prefix[i] + nums[i];
+        }
+    }
+
+    public int sumRange(int left, int right) {
+        return prefix[right + 1] - prefix[left];
+    }
+}
+
