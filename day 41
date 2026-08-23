@@ -1,0 +1,49 @@
+1.693 – Binary Number with Alternating Bits
+  class Solution {
+    public boolean hasAlternatingBits(int n) {
+        int prev = n % 2;
+        n = n / 2;
+
+        while (n > 0) {
+            int curr = n % 2;
+
+            if (curr == prev) {
+                return false;
+            }
+
+            prev = curr;
+            n = n / 2;
+        }
+
+        return true;
+    }
+}
+2.728 – Self Dividing Numbers
+  class Solution {
+    public List<Integer> selfDividingNumbers(int left, int right) {
+        List<Integer> result = new ArrayList<>();
+
+        for (int i = left; i <= right; i++) {
+            int n = i;
+            boolean valid = true;
+
+            while (n > 0) {
+                int digit = n % 10;
+
+                if (digit == 0 || i % digit != 0) {
+                    valid = false;
+                    break;
+                }
+
+                n = n / 10;
+            }
+
+            if (valid) {
+                result.add(i);
+            }
+        }
+
+        return result;
+    }
+}
+  
