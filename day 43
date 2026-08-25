@@ -1,0 +1,38 @@
+1.153. Find Minimum in Rotated Sorted Array
+  class Solution {
+    public int findMin(int[] nums) {
+        int left = 0;
+        int right = nums.length - 1;
+
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+
+            if (nums[mid] > nums[right]) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+
+        return nums[left];
+    }
+}
+2.401. Binary Watch
+  class Solution {
+    public List<String> readBinaryWatch(int turnedOn) {
+        List<String> result = new ArrayList<>();
+
+        for (int hour = 0; hour < 12; hour++) {
+            for (int minute = 0; minute < 60; minute++) {
+
+                int bits = Integer.bitCount(hour) + Integer.bitCount(minute);
+
+                if (bits == turnedOn) {
+                    result.add(String.format("%d:%02d", hour, minute));
+                }
+            }
+        }
+
+        return result;
+    }
+}
