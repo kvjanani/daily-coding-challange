@@ -1,0 +1,38 @@
+1.LeetCode 852 – Peak Index in a Mountain Array
+  class Solution {
+    public int peakIndexInMountainArray(int[] arr) {
+        int left = 0;
+        int right = arr.length - 1;
+
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+
+            if (arr[mid] < arr[mid + 1]) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+
+        return left;
+    }
+}
+2.LeetCode 2000 – Reverse Prefix of Word
+  class Solution {
+    public String reversePrefix(String word, char ch) {
+        int index = word.indexOf(ch);
+
+        if (index == -1) {
+            return word;
+        }
+
+        String prefix = word.substring(0, index + 1);
+        String remaining = word.substring(index + 1);
+
+        String reversed = new StringBuilder(prefix)
+                .reverse()
+                .toString();
+
+        return reversed + remaining;
+    }
+}
