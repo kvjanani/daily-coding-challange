@@ -1,0 +1,55 @@
+1.LeetCode 832 – Flipping an Image
+  class Solution {
+    public int[][] flipAndInvertImage(int[][] image) {
+        for (int[] row : image) {
+            int left = 0;
+            int right = row.length - 1;
+
+            while (left <= right) {
+                int temp = row[left];
+                row[left] = row[right];
+                row[right] = temp;
+
+                row[left] ^= 1;
+                if (left != right) {
+                    row[right] ^= 1;
+                }
+
+                left++;
+                right--;
+            }
+        }
+        return image;
+    }
+}
+2.LeetCode 234 – Palindrome Linked List
+  class Solution {
+    public boolean isPalindrome(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        ListNode prev = null;
+
+        while (slow != null) {
+            ListNode next = slow.next;
+            slow.next = prev;
+            prev = slow;
+            slow = next;
+        }
+
+        while (prev != null) {
+            if (head.val != prev.val) {
+                return false;
+            }
+            head = head.next;
+            prev = prev.next;
+        }
+
+        return true;
+    }
+}
