@@ -1,0 +1,59 @@
+LeetCode 552 – Student Attendance Record II
+  class Solution {
+    public int checkRecord(int n) {
+        int MOD = 1000000007;
+
+        // dp[a][l]
+        // a = number of absences (0 or 1)
+        // l = consecutive late days (0, 1, 2)
+        long[][] dp = new long[2][3];
+
+        dp[0][0] = 1;
+
+        for (int day = 0; day < n; day++) {
+            long[][] next = new long[2][3];
+
+            for (int a = 0; a <= 1; a++) {
+                for (int l = 0; l <= 2; l++) {
+
+                    long value = dp[a][l];
+
+                    // Present (P)
+                    next[a][0] = (next[a][0] + value) % MOD;
+
+                    // Absent (A)
+                    if (a == 0) {
+                        next[1][0] = (next[1][0] + value) % MOD;
+                    }
+
+                    // Late (L)
+                    if (l < 2) {
+                        next[a][l + 1] =
+                            (next[a][l + 1] + value) % MOD;
+                    }
+                }
+            }
+
+            dp = next;
+        }
+
+        long answer = 0;
+
+        for (int a = 0; a <= 1; a++) {
+            for (int l = 0; l <= 2; l++) {
+                answer = (answer + dp[a][l]) % MOD;
+            }
+        }
+
+        return (int) answer;
+    }
+}
+2.610 – Triangle Judgement
+  CASE
+    WHEN x + y > z
+     AND x + z > y
+     AND y + z > x
+    THEN 'Yes'
+    ELSE 'No'
+END
+  
