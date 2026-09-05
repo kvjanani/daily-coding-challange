@@ -1,0 +1,69 @@
+1.LeetCode 543 – Diameter of Binary Tree
+class Solution {
+    int diameter = 0;
+
+    public int diameterOfBinaryTree(TreeNode root) {
+        height(root);
+        return diameter;
+    }
+
+    private int height(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+
+        int left = height(node.left);
+        int right = height(node.right);
+
+        diameter = Math.max(diameter, left + right);
+
+        return Math.max(left, right) + 1;
+    }
+}
+2.LeetCode 632 – Smallest Range Covering Elements from K Lists
+class Solution {
+    public int[] smallestRange(List<List<Integer>> nums) {
+        PriorityQueue<int[]> pq = new PriorityQueue<>(
+            (a, b) -> Integer.compare(a[0], b[0])
+        );
+
+        int currentMax = Integer.MIN_VALUE;
+
+        for (int i = 0; i < nums.size(); i++) {
+            int value = nums.get(i).get(0);
+            pq.offer(new int[]{value, i, 0});
+            currentMax = Math.max(currentMax, value);
+        }
+
+        int bestStart = pq.peek()[0];
+        int bestEnd = currentMax;
+
+        while (pq.size() == nums.size()) {
+            int[] curr = pq.poll();
+
+            int currentMin = curr[0];
+
+            if (currentMax - currentMin < bestEnd - bestStart) {
+                bestStart = currentMin;
+                bestEnd = currentMax;
+            }
+
+            int listIndex = curr[1];
+            int elementIndex = curr[2] + 1;
+
+            if (elementIndex < nums.get(listIndex).size()) {
+                int nextValue = nums.get(listIndex).get(elementIndex);
+
+                pq.offer(new int[]{
+                    nextValue,
+                    listIndex,
+                    elementIndex
+                });
+
+                currentMax = Math.max(currentMax, nextValue);
+            }
+        }
+
+        return new int[]{bestStart, bestEnd};
+    }
+}
