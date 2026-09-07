@@ -1,0 +1,36 @@
+1.LeetCode 357 – Count Numbers with Unique Digits
+class Solution {
+    public int countNumbersWithUniqueDigits(int n) {
+        if (n == 0) return 1;
+
+        int ans = 10, cur = 9, choices = 9;
+
+        for (int i = 2; i <= n && i <= 10; i++) {
+            cur *= choices--;
+            ans += cur;
+        }
+
+        return ans;
+    }
+}
+2.LeetCode 506 – Relative Ranks
+class Solution {
+    public String[] findRelativeRanks(int[] score) {
+        int n = score.length;
+        int[] a = score.clone();
+        java.util.Arrays.sort(a);
+
+        String[] ans = new String[n];
+
+        for (int i = 0; i < n; i++) {
+            int rank = n - java.util.Arrays.binarySearch(a, score[i]);
+
+            if (rank == 1) ans[i] = "Gold Medal";
+            else if (rank == 2) ans[i] = "Silver Medal";
+            else if (rank == 3) ans[i] = "Bronze Medal";
+            else ans[i] = String.valueOf(rank);
+        }
+
+        return ans;
+    }
+}
