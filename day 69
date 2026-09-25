@@ -1,0 +1,58 @@
+1. LeetCode 883 – Projection Area of 3D Shapes
+class Solution {
+    public int projectionArea(int[][] grid) {
+        int n = grid.length;
+        int area = 0;
+
+        for (int i = 0; i < n; i++) {
+            int rowMax = 0;
+            int colMax = 0;
+
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] > 0)
+                    area++;
+
+                rowMax = Math.max(rowMax, grid[i][j]);
+                colMax = Math.max(colMax, grid[j][i]);
+            }
+
+            area += rowMax + colMax;
+        }
+
+        return area;
+    }
+}
+2. LeetCode 860 – Lemonade Change
+class Solution {
+    public boolean lemonadeChange(int[] bills) {
+        int five = 0;
+        int ten = 0;
+
+        for (int bill : bills) {
+            if (bill == 5) {
+                five++;
+            } 
+            else if (bill == 10) {
+                if (five == 0)
+                    return false;
+
+                five--;
+                ten++;
+            } 
+            else {
+                if (ten > 0 && five > 0) {
+                    ten--;
+                    five--;
+                } 
+                else if (five >= 3) {
+                    five -= 3;
+                } 
+                else {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+}
