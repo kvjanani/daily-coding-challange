@@ -1,0 +1,16 @@
+183 – Customers Who Never Order
+
+SQL Code
+SELECT c.name AS Customers
+FROM Customers c
+LEFT JOIN Orders o
+ON c.id = o.customerId
+WHERE o.customerId IS NULL;
+
+596 – Classes More Than 5 Students
+
+SQL Code
+SELECT class
+FROM Courses
+GROUP BY class
+HAVING COUNT(student) >= 5;
